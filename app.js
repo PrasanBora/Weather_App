@@ -1,0 +1,101 @@
+
+let loc =document.getElementById("location");
+let tempvalue =document.getElementById("temperature");
+let climate =document.querySelector(".weather");
+let humidvalue =document.querySelector(".humidity");
+let pressvalue =document.querySelector(".pressure");
+let speedvalue =document.getElementById("speed");
+
+let timevalue=document.querySelector(".time");
+
+const searchInput=document.querySelector(".searchbox");
+const searchButton=document.querySelector(".button");
+
+
+
+
+
+window.addEventListener("load" ,() =>{
+    let long;
+    let lat;
+  
+    if(navigator.geolocation)
+    {
+        navigator.geolocation.getCurrentPosition( (position)=>
+        {
+            long=position.coords.longitude;
+            lat=position.coords.latitude;
+          
+             const api=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=ad2057c532aab725653dbc1f278ada52&units=metric`;
+             console.log(api);
+             fetch(api).then((response)=> {return response.json();  } )
+             .then((data)=>{/*console.log(data)*/ transferData(data)})
+        });
+        transferData =(data)=>{ writeValues(data) }
+    }
+})
+
+
+
+//---------------------------
+
+    searchButton.addEventListener("click",async (e)=>{
+    console.log(e);
+    e.preventDefault(); 
+
+    const city = searchInput.value;
+
+   const api2 =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ad2057c532aab725653dbc1f278ada52&units=metric` ;
+    // console.log(api2); 
+     fetch(api2 ).then((response)=> {
+        if (!response.ok) {
+            alert("No such city found..");
+          }
+          return response.json();
+         } )
+    .then((data)=> { writeValues(data); } )
+       
+            
+})
+
+
+//-----------------
+ 
+function writeValues (data) {
+    const name =data.name;
+    const temp=data.main.temp ;
+    const humid =data.main.humidity;
+    const feel =data.main.feels_like;
+    const press =data.main.pressure;
+    const descrip =data.weather[0].description;
+    const country=data.sys.country;
+    const wind=data.wind.speed;
+    const icon =data.weather[0].icon;
+    let daydate=data.timezone;
+
+
+     //console.log(pressvalue,speedvalue,humidvalue,descrip);
+
+
+    loc.textContent=name + "," +country;
+    tempvalue.innerText=temp+ "° C";
+    climate.textContent=descrip;
+    speedvalue.textContent=wind+" km/h" ;
+    humidvalue.innerText=humid+" %" ;
+    pressvalue.innerText=press+" hpa";
+ 
+    // timevalue.textContent=new Date(daydate).toLocaleTimeString("en-US");
+    //  console.log(new Date(daydate).toLocaleDateString("en-US"));
+
+    weathericon.src="http://openweathermap.org/img/wn/"+icon+"@2x.png" ;
+   
+   
+}
+
+///----------Default location delhi 
+
+const defaultapi =`https://api.openweathermap.org/data/2.5/weather?q=delhi&appid=ad2057c532aab725653dbc1f278ada52&units=metric` ;
+   
+      fetch(defaultapi ).then((response)=> {
+          return response.json(); } )
+    .then((data)=> { writeValues(data); } )

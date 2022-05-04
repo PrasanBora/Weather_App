@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="weatherf.css">
+    <meta charset="UTF-8">
+    <title>weather_app</title>
+    
+</head>
+<body>
+    <div class="container">
+        <div >
+          <!-- <h1> Know the weather! </h1> -->
+           <form action="/" method="post"> 
+            <input class="searchbox" type="text" autocomplete="off" name="city" placeholder="    Search City "> 
+         
+            <button  class="button" type ="submit" ><img class="searchimage" src ="sources/search.png"><img ></button>
+           </form>
+
+         </div>
+      
+         <div class="Geodata">
+             <p >
+              <h1 id="location" >Delhi ,IN</h1>
+             </p>
+             <!-- <p class="datetime">
+              <h3 class="time"> 2:57 PM , May 3 </h3>
+             </p> -->
+         </div>
+         
+         <div >
+           <h1 id="temperature"> 25 &#176 C</h1>
+           <image  id="weathericon" src="http://openweathermap.org/img/wn/10d@2x.png"> </image>
+           <p > <h1 class="weather"> SUNNY </h1> </p>
+         </div>
+         <p><h3 class="weatherdetails">  Other Details </h3></p>
+          <div class="others" > 
+           
+           <div class=" othersicon"> 
+             <img class="image" src="sources\humidity.png" ></img>
+               <p> Humidity <br> <p class="humidity" > 40 %</p> </p>
+           </div>
+
+           <div class=" othersicon" > 
+             <img class="image" src="sources\barometer.png" ></img>
+            <p> Pressure <br> <p class="pressure" > 40 hpa</p> </p>
+           </div> 
+           
+           <div class=" othersicon" > 
+            <img class="image" src="sources\wind.png" ></img>
+            <p> Wind <br> <p id="speed" > 40km/h </p> </p>
+           </div>
+           
+         </div>
+   </div>
+   <script src="app.js" ></script>
+  
+   
+</body>
+</html>
