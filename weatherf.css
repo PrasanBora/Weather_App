@@ -28,11 +28,15 @@ body{
   
  
 }
-/* .time{ 
+.datetime{ 
   
-  margin: 5% auto;
+  /* display: flex; */
+  /* justify-content: space-around; */
+  /* margin: 3% auto; */
+  font-size:3.5vmin;
+  /* font-weight:lighter */
   
-} */
+}
 
 .searchbox{
   border-radius: 20px;
@@ -46,6 +50,7 @@ body{
   display: inline-block;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   outline-width: 0;
+  padding-left: 20px;
 }
 
 .button{

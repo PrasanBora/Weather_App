@@ -7,19 +7,17 @@ let pressvalue =document.querySelector(".pressure");
 let speedvalue =document.getElementById("speed");
 
 let timevalue=document.querySelector(".time");
+let dateValue=document.querySelector(".date");
 
 const searchInput=document.querySelector(".searchbox");
 const searchButton=document.querySelector(".button");
-
-
-
 
 
 window.addEventListener("load" ,() =>{
     let long;
     let lat;
   
-    if(navigator.geolocation)
+    if(navigator.geolocation)  // Data wrt Geolocation 
     {
         navigator.geolocation.getCurrentPosition( (position)=>
         {
@@ -34,7 +32,6 @@ window.addEventListener("load" ,() =>{
         transferData =(data)=>{ writeValues(data) }
     }
 })
-
 
 
 //---------------------------
@@ -59,7 +56,7 @@ window.addEventListener("load" ,() =>{
 })
 
 
-//-----------------
+//---Define values of variable
  
 function writeValues (data) {
     const name =data.name;
@@ -71,7 +68,7 @@ function writeValues (data) {
     const country=data.sys.country;
     const wind=data.wind.speed;
     const icon =data.weather[0].icon;
-    let daydate=data.timezone;
+    // let daydate=data.timezone;
 
 
      //console.log(pressvalue,speedvalue,humidvalue,descrip);
@@ -84,9 +81,7 @@ function writeValues (data) {
     humidvalue.innerText=humid+" %" ;
     pressvalue.innerText=press+" hpa";
  
-    // timevalue.textContent=new Date(daydate).toLocaleTimeString("en-US");
-    //  console.log(new Date(daydate).toLocaleDateString("en-US"));
-
+    
     weathericon.src="http://openweathermap.org/img/wn/"+icon+"@2x.png" ;
    
    
@@ -99,3 +94,22 @@ const defaultapi =`https://api.openweathermap.org/data/2.5/weather?q=delhi&appid
       fetch(defaultapi ).then((response)=> {
           return response.json(); } )
     .then((data)=> { writeValues(data); } )
+
+
+    // calculating time and assigning to date and time  
+
+const month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const weekday = ["Sun","Mon","Tues","Wed","Thurs","Fri","Sat"];
+
+
+var today = new Date();
+let hours= today.getHours()
+let ampm = hours >= 12 ? 'PM' : 'AM';
+hours = hours % 12;
+
+var date = today.getDate()+' '+month[today.getMonth()]+' '+ weekday[today.getDay()];
+
+var time = hours +":" + today.getMinutes()+' '+ ampm ;
+
+timevalue.textContent = time;
+dateValue.textContent=date;
